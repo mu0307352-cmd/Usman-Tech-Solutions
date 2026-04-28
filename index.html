@@ -1,4 +1,5 @@
-<!DOCTYPE html>
+
+html_content = '''<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -371,25 +372,59 @@
             line-height: 1.8;
         }
 
-        /* Contact Section */
+        /* Contact Section - Animated */
         .contact {
             padding: 6rem 2rem;
-            background: var(--light);
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0f172a 100%);
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .contact::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(37,99,235,0.1) 0%, transparent 70%);
+            animation: rotate 20s linear infinite;
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .contact .container {
+            position: relative;
+            z-index: 1;
+        }
+
+        .contact .section-title h2 {
+            color: white;
+        }
+
+        .contact .section-title p {
+            color: rgba(255,255,255,0.7);
         }
 
         .contact-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 4rem;
+            align-items: start;
         }
 
         .contact-info h3 {
             font-size: 2rem;
             margin-bottom: 1.5rem;
+            color: white;
         }
 
         .contact-info p {
-            color: var(--gray);
+            color: rgba(255,255,255,0.7);
             margin-bottom: 2rem;
         }
 
@@ -404,17 +439,25 @@
             align-items: center;
             gap: 1rem;
             padding: 1.5rem;
-            background: white;
+            background: rgba(255,255,255,0.05);
             border-radius: 15px;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            transition: all 0.3s;
+            backdrop-filter: blur(10px);
+        }
+
+        .contact-item:hover {
+            background: rgba(255,255,255,0.1);
+            transform: translateX(10px);
+            border-color: var(--primary);
         }
 
         .contact-item i {
             font-size: 1.5rem;
-            color: var(--primary);
+            color: #fbbf24;
             width: 50px;
             height: 50px;
-            background: rgba(37, 99, 235, 0.1);
+            background: rgba(251, 191, 36, 0.1);
             border-radius: 50%;
             display: flex;
             align-items: center;
@@ -423,63 +466,138 @@
 
         .contact-item div h4 {
             margin-bottom: 0.25rem;
+            color: white;
         }
 
         .contact-item div p {
             margin: 0;
-            color: var(--gray);
+            color: rgba(255,255,255,0.7);
         }
 
-        .contact-form {
-            background: white;
-            padding: 2.5rem;
+        /* Animated Contact Card */
+        .animated-contact-card {
+            background: rgba(255,255,255,0.05);
             border-radius: 20px;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            padding: 3rem;
+            border: 1px solid rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            position: relative;
+            overflow: hidden;
+            text-align: center;
         }
 
-        .form-group {
+        .animated-contact-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+            animation: shimmer 3s infinite;
+        }
+
+        @keyframes shimmer {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+
+        .animated-contact-card .card-icon {
+            font-size: 4rem;
+            color: #fbbf24;
             margin-bottom: 1.5rem;
+            animation: pulse 2s ease-in-out infinite;
         }
 
-        .form-group label {
-            display: block;
-            margin-bottom: 0.5rem;
-            font-weight: 600;
-            color: var(--dark);
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
         }
 
-        .form-group input,
-        .form-group textarea {
-            width: 100%;
-            padding: 1rem;
-            border: 2px solid #e2e8f0;
-            border-radius: 10px;
-            font-family: inherit;
-            transition: border-color 0.3s;
-        }
-
-        .form-group input:focus,
-        .form-group textarea:focus {
-            outline: none;
-            border-color: var(--primary);
-        }
-
-        .submit-btn {
-            width: 100%;
-            padding: 1rem;
-            background: var(--primary);
+        .animated-contact-card h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
             color: white;
-            border: none;
-            border-radius: 10px;
-            font-size: 1.1rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s;
         }
 
-        .submit-btn:hover {
-            background: var(--secondary);
-            transform: translateY(-2px);
+        .animated-contact-card p {
+            color: rgba(255,255,255,0.7);
+            margin-bottom: 2rem;
+            line-height: 1.8;
+        }
+
+        .animated-contact-card .btn-glow {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+
+        .animated-contact-card .btn-glow:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(37, 99, 235, 0.5);
+        }
+
+        .typing-text {
+            font-size: 1.2rem;
+            color: #fbbf24;
+            min-height: 30px;
+            margin-bottom: 1rem;
+        }
+
+        .cursor {
+            animation: blink 1s infinite;
+        }
+
+        @keyframes blink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0; }
+        }
+
+        /* Particles */
+        .particles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: 0;
+        }
+
+        .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: rgba(255,255,255,0.3);
+            border-radius: 50%;
+            animation: particle-float 15s infinite;
+        }
+
+        @keyframes particle-float {
+            0%, 100% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100vh) rotate(720deg);
+                opacity: 0;
+            }
         }
 
         /* Footer */
@@ -528,6 +646,57 @@
             opacity: 0.8;
         }
 
+        /* WhatsApp Fixed Icon */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 30px;
+            left: 30px;
+            z-index: 9999;
+            background: #25d366;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 2rem;
+            text-decoration: none;
+            box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4);
+            transition: all 0.3s;
+            animation: whatsapp-bounce 2s infinite;
+        }
+
+        .whatsapp-float:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 30px rgba(37, 211, 102, 0.6);
+        }
+
+        @keyframes whatsapp-bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .whatsapp-tooltip {
+            position: absolute;
+            left: 70px;
+            background: #25d366;
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 10px;
+            font-size: 0.9rem;
+            white-space: nowrap;
+            opacity: 0;
+            transform: translateX(-10px);
+            transition: all 0.3s;
+            pointer-events: none;
+        }
+
+        .whatsapp-float:hover .whatsapp-tooltip {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
         /* Responsive */
         @media (max-width: 768px) {
             .nav-links {
@@ -562,6 +731,14 @@
 
             .section-title h2 {
                 font-size: 2rem;
+            }
+
+            .whatsapp-float {
+                width: 50px;
+                height: 50px;
+                font-size: 1.5rem;
+                bottom: 20px;
+                left: 20px;
             }
         }
 
@@ -601,7 +778,7 @@
     <section class="hero" id="home">
         <div class="hero-container">
             <div class="hero-content">
-                <h1>Hi, I'm a <span>Web Developer</span></h1>
+                <h1>Hi, I\'m a <span>Web Developer</span></h1>
                 <p>I create beautiful, functional websites and web applications that help businesses grow online. Specializing in modern frontend and backend technologies.</p>
                 <div class="hero-buttons">
                     <a href="#contact" class="btn btn-primary">
@@ -775,12 +952,13 @@
         </div>
     </section>
 
-    <!-- Contact Section -->
+    <!-- Contact Section - Animated (Form Removed) -->
     <section class="contact" id="contact">
+        <div class="particles" id="particles"></div>
         <div class="container">
             <div class="section-title">
                 <h2>Get In Touch</h2>
-                <p>Let's work together on your next project</p>
+                <p>Let\'s work together on your next project</p>
             </div>
             <div class="contact-grid">
                 <div class="contact-info">
@@ -819,28 +997,17 @@
                     </div>
                 </div>
                 
-                <div class="contact-form">
-                    <form onsubmit="event.preventDefault(); alert('Message sent successfully!');">
-                        <div class="form-group">
-                            <label>Your Name</label>
-                            <input type="text" placeholder="Enter your name" required>
-                        </div>
-                        <div class="form-group">
-                            <label>Your Email</label>
-                            <input type="email" placeholder="Enter your email" required>
-                        </div>
-                        <div class="form-group">
-                            <label>Subject</label>
-                            <input type="text" placeholder="Project inquiry" required>
-                        </div>
-                        <div class="form-group">
-                            <label>Message</label>
-                            <textarea rows="5" placeholder="Tell me about your project..." required></textarea>
-                        </div>
-                        <button type="submit" class="submit-btn">
-                            <i class="fas fa-paper-plane"></i> Send Message
-                        </button>
-                    </form>
+                <!-- Animated Contact Card (Form ki jagah) -->
+                <div class="animated-contact-card">
+                    <div class="card-icon">
+                        <i class="fas fa-rocket"></i>
+                    </div>
+                    <h3>Ready to Start?</h3>
+                    <div class="typing-text" id="typingText"></div>
+                    <p>I\'m currently available for freelance work and open to discussing new projects. Let\'s create something amazing together!</p>
+                    <a href="mailto:mu0307352@gmail.com" class="btn-glow">
+                        <i class="fas fa-paper-plane"></i> Start a Project
+                    </a>
                 </div>
             </div>
         </div>
@@ -850,11 +1017,11 @@
     <footer>
         <div class="footer-content">
             <div class="social-links">
-                <a href="#"><i class="fab fa-facebook-f"></i></a>
-                <a href="#"><i class="fab fa-twitter"></i></a>
-                <a href="#"><i class="fab fa-linkedin-in"></i></a>
-                <a href="#"><i class="fab fa-github"></i></a>
-                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="https://www.facebook.com/muhammad.usman.15573"><i class="fab fa-facebook-f"></i></a>
+                <a href="https://wa.me/923071514352"><i class="fab fa-whatsapp"></i></a>
+                <a href="https://www.linkedin.com/in/mughal-usman-7a5435381"><i class="fab fa-linkedin-in"></i></a>
+                <a href="https://www.tiktok.com/@mirzausman823?_r=1&_t=ZS-95uaJS6Tdyh"><i class="fab fa-tiktok"></i></a>
+                <a href="https://www.instagram.com/m.usman.444/"><i class="fab fa-instagram"></i></a>
             </div>
             <div class="footer-bottom">
                 <p>&copy; 2026 Web Developer Portfolio. All Rights Reserved.</p>
@@ -862,6 +1029,12 @@
             </div>
         </div>
     </footer>
+
+    <!-- WhatsApp Fixed Icon -->
+    <a href="https://wa.me/923071514352" target="_blank" class="whatsapp-float">
+        <i class="fab fa-whatsapp"></i>
+        <span class="whatsapp-tooltip">Chat on WhatsApp</span>
+    </a>
 
  <script>
     // Smooth scroll for navigation links
@@ -913,7 +1086,68 @@
         navLinks.style.padding = '1rem';
         navLinks.style.boxShadow = '0 10px 20px rgba(0,0,0,0.1)';
     });
+
+    // Typing Effect
+    const typingTexts = [
+        "Web Development",
+        "UI/UX Design", 
+        "React Applications",
+        "E-Commerce Solutions",
+        "SEO Optimization"
+    ];
+    
+    let textIndex = 0;
+    let charIndex = 0;
+    let isDeleting = false;
+    const typingElement = document.getElementById('typingText');
+    
+    function typeEffect() {
+        const currentText = typingTexts[textIndex];
+        
+        if (isDeleting) {
+            typingElement.innerHTML = currentText.substring(0, charIndex - 1) + '<span class="cursor">|</span>';
+            charIndex--;
+        } else {
+            typingElement.innerHTML = currentText.substring(0, charIndex + 1) + '<span class="cursor">|</span>';
+            charIndex++;
+        }
+        
+        let typeSpeed = isDeleting ? 50 : 100;
+        
+        if (!isDeleting && charIndex === currentText.length) {
+            typeSpeed = 2000;
+            isDeleting = true;
+        } else if (isDeleting && charIndex === 0) {
+            isDeleting = false;
+            textIndex = (textIndex + 1) % typingTexts.length;
+            typeSpeed = 500;
+        }
+        
+        setTimeout(typeEffect, typeSpeed);
+    }
+    
+    typeEffect();
+
+    // Create Particles
+    function createParticles() {
+        const particlesContainer = document.getElementById('particles');
+        const particleCount = 20;
+        
+        for (let i = 0; i < particleCount; i++) {
+            const particle = document.createElement('div');
+            particle.classList.add('particle');
+            particle.style.left = Math.random() * 100 + '%';
+            particle.style.animationDuration = (Math.random() * 10 + 10) + 's';
+            particle.style.animationDelay = (Math.random() * 10) + 's';
+            particle.style.width = (Math.random() * 4 + 2) + 'px';
+            particle.style.height = particle.style.width;
+            particlesContainer.appendChild(particle);
+        }
+    }
+    
+    createParticles();
 </script>
 
 </body>
 </html>
+
